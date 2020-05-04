@@ -10,19 +10,21 @@ import SwiftUI
 
 struct ContentView: View {
     
-    var data:GroceryData
+    @EnvironmentObject var data:GroceryData
     let path = \GrocerySection.items
-
-    
 
     var body: some View {
         NavigationView{
             List {
-                
+                Toggle(isOn: $data.showFavorites) {
+                    Text("Show Favorites only")
+                }
                 ForEach(data.sections, id: \.self) { (item) in
                     Section(header: Text(item.sectionName)) {
                         ForEach(item.items) { (sectionItem) in
-                            Text(sectionItem.name)
+                            if !self.data.showFavorites || sectionItem.isFavorite {
+                                GroceryRow(grocery: sectionItem)
+                            }
                         }
                     }
                 }
@@ -35,6 +37,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(data: DataFetcher.getData())
+        ContentView().environmentObject( DataFetcher.getData())
     }
 }

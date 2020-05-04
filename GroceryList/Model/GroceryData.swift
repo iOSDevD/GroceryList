@@ -7,10 +7,18 @@
 //
 
 import Foundation
+import SwiftUI
+import Combine
 
-struct GroceryData: Decodable  {
-    var showFavorites:Bool = false
+class GroceryData: Decodable , ObservableObject   {
+    @Published var showFavorites:Bool = false
     var sections:[GrocerySection]
+    enum CodingKeys: CodingKey {
+        case sections
+    }
+    init() {
+        sections = []
+    }
     
 }
 
@@ -25,7 +33,8 @@ class DataFetcher {
             }
         
         }
-        return GroceryData(showFavorites: false, sections: [])
+        let defaultData = GroceryData()
+        return defaultData
     }
 }
 
@@ -42,4 +51,13 @@ struct Grocery: Identifiable,Hashable, Decodable {
     var name:String
     var isFavorite:Bool
     var price:Double
+}
+
+extension Grocery{
+    func getFormatttedPrice() -> String{
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        let formatterCurrency =  formatter.string(for: self.price) ?? ""
+        return formatterCurrency
+    }
 }
