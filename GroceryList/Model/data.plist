@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>showFavorites</key>
-	<false/>
 	<key>sections</key>
 	<array>
 		<dict>
@@ -48,9 +46,9 @@
 					<key>name</key>
 					<string>Fresh Baked Bread</string>
 					<key>isFavorite</key>
-					<false/>
+					<true/>
 					<key>price</key>
-					<real>5</real>
+					<integer>5</integer>
 				</dict>
 				<dict>
 					<key>id</key>
@@ -58,9 +56,9 @@
 					<key>name</key>
 					<string>Cake</string>
 					<key>isFavorite</key>
-					<false/>
+					<true/>
 					<key>price</key>
-					<real>15</real>
+					<integer>15</integer>
 				</dict>
 				<dict>
 					<key>id</key>
